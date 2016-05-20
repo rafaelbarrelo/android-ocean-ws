@@ -10,12 +10,18 @@
     android:orientation="vertical"
     tools:context="com.example.samsung.githubapp.MainActivity">
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/label_nome"
-        android:id="@+id/main_et_name"
-        />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_nome"
+            android:id="@+id/main_et_name"
+            />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/main_btn_buscar"
@@ -27,11 +33,16 @@
         android:id="@+id/main_tv_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:layout_margin="5dp"
         android:text="@string/app_name" />
     
     <ImageView
         android:id="@+id/main_img_foto"
         android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>

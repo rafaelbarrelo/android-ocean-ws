@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">GitHubApp</string>
-    <string name="label_nome">Informe o nome</string>
+    <string name="label_nome">Informe o nome do usuário no GitHub</string>
     <string name="btn_buscar">Buscar</string>
 </resources>

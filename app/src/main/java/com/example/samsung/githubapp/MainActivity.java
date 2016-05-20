@@ -1,5 +1,6 @@
 package com.example.samsung.githubapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String GITHUB_API_BASE_URL = "https://api.github.com";
+
     private EditText etName;
     private TextView tvResult;
     private ImageView foto;
@@ -37,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
         foto = (ImageView) findViewById(R.id.main_img_foto);
         btnBusca = (Button) findViewById(R.id.main_btn_buscar);
 
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("Carregando...");
+        dialog.setTitle("Aguarde");
+
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
-
+                dialog.show();
                 RestAdapter adapter = new RestAdapter.Builder()
-                                        .setEndpoint("https://api.github.com")
+                                        .setEndpoint(GITHUB_API_BASE_URL)
                                         .build();
 
                 GitHubAPI gitHubAPI = adapter.create(GitHubAPI.class);
@@ -51,15 +57,19 @@ public class MainActivity extends AppCompatActivity {
                 gitHubAPI.getUser(etName.getText().toString(), new retrofit.Callback<Usuario>() {
                     @Override
                     public void success(Usuario usuario, Response response) {
-                        //Toast.makeText(context, usuario.toString(), Toast.LENGTH_LONG).show();
                         tvResult.setText(usuario.getName());
                         Picasso.with(getApplication()).load(usuario.getAvatarUrl()).resize(300, 300)
                                 .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
                                 .into(foto);
+
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
+                        tvResult.setText("Usuário não encontrado.");
+                        Picasso.with(getApplication()).load(R.mipmap.ic_launcher).into(foto);
+                        dialog.dismiss();
                     }
                 });
             }
