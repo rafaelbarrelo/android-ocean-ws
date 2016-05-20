@@ -2,6 +2,7 @@
 Aplicativo Android construído durante o CodeLab do Samsung Ocean
 
 * A6 - Android CodeLab de Web Services
+
 O objetivo é apenas demonstar o consumo de WebServices no Android. Foi usada a biblioteca Retrofit para requisições HTTP para a API do GitHub e a biblioteca Picasso para o carregamento da imagem.
 
 ![image](prints/print1.png)
